@@ -5,12 +5,14 @@ let validation = {
 
         let inputs = form.querySelectorAll('input');
 
+        validation.clearErrors();
+
         for(let i=0; i<inputs.length; i++) {
             let input = inputs[i];
             let check = validation.checkInput(input);
             if(check !== true) {
                 send = false;
-                console.log(check);
+                validation.showError(input, check);
             }
         }
 
@@ -41,6 +43,27 @@ let validation = {
         }
 
         return true;
+    },
+    showError:(input, error) => {
+        input.style.borderColor = '#ff0000';
+
+        let errorElement = document.createElement('div');
+        errorElement.classList.add('error');
+        errorElement.innerHTML = error;
+
+        input.parentElement.insertBefore(errorElement, input.ElementSibling);
+
+    },
+    clearErrors:() => {
+        let inputs = form.querySelectorAll('input');
+        for(let i = 0; i < inputs.length; i++){
+            inputs[i].style = '';
+        }
+
+        let errorElements = document.querySelectorAll('.error');
+        for(let i = 0; i < errorElements.length; i++){
+            errorElements[i].remove();
+        }
     }
 };
 
