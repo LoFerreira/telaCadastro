@@ -45,4 +45,4 @@ let validation = {
 };
 
 let form = document.querySelector('.validator');
-form.addEventListener('submit', validation.handleSubmi);
+form.addEventListener('submit', validation.handleSubmit);
